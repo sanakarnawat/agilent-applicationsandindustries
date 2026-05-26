@@ -186,41 +186,53 @@ button{font-family:var(--fn);cursor:pointer}
 .ad-main{}
 .ad-side{}
 
-/* Workflow accordion */
-.wf-comp{background:var(--bll);border:1px solid var(--bl);border-radius:2px;padding:24px 24px 18px;margin-bottom:28px}
-.wf-comp-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+/* Horizontal workflow step selector */
+.wf-comp{background:var(--bll);border:1px solid var(--bl);border-radius:2px;padding:24px 24px 20px;margin-bottom:28px}
+.wf-comp-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
 .wf-comp-head h3{font-size:16px;font-weight:700;font-family:var(--fc);color:var(--bd)}
 .wf-comp-head p{font-size:12px;color:var(--g5)}
-/* Progress connector line running through all steps */
-.wf-accordion{display:flex;flex-direction:column;gap:0;position:relative}
-.wf-accordion::before{content:'';position:absolute;left:20px;top:24px;bottom:24px;width:2px;background:linear-gradient(to bottom,var(--bp),var(--bl));z-index:0}
-/* Each step row */
-.wf-acc-step{position:relative;z-index:1}
-.wf-acc-trigger{display:flex;align-items:center;gap:14px;padding:12px 14px 12px 0;cursor:pointer;user-select:none;background:transparent;border:none;width:100%;text-align:left}
-.wf-acc-trigger:hover .wf-acc-name{color:var(--bp)}
-/* Step number circle */
-.wf-acc-num{width:40px;height:40px;border-radius:50%;background:var(--w);border:2px solid var(--g2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:13px;font-weight:700;color:var(--g5);font-family:var(--fc)}
-.wf-acc-step.open .wf-acc-num{background:var(--bp);border-color:var(--bp);color:#fff}
-.wf-acc-step.done .wf-acc-num{background:var(--w);border-color:var(--bp);color:var(--bp)}
-/* Step labels */
-.wf-acc-labels{flex:1}
-.wf-acc-label{font-size:10px;font-weight:700;color:var(--bp);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1px}
-.wf-acc-name{font-size:14px;font-weight:700;color:var(--g9);transition:color .15s;font-family:var(--fc)}
-/* Chevron */
-.wf-acc-chev{color:var(--g3);transition:transform .25s;flex-shrink:0}
-.wf-acc-step.open .wf-acc-chev{transform:rotate(180deg);color:var(--bp)}
-/* Expandable panel */
-.wf-acc-panel{max-height:0;overflow:hidden;transition:max-height .3s ease,opacity .25s ease;opacity:0;padding-left:54px}
-.wf-acc-step.open .wf-acc-panel{max-height:300px;opacity:1}
-.wf-acc-content{background:var(--w);border:1px solid var(--g2);border-radius:2px;padding:14px 16px;margin-bottom:8px;border-left:3px solid var(--bp)}
-.wf-acc-content .wf-prod-name{font-size:13px;font-weight:700;color:var(--bd);margin-bottom:4px}
-.wf-acc-content .wf-prod-detail{font-size:12px;color:var(--g5);line-height:1.5;margin-bottom:10px}
-.wf-acc-content .wf-prod-link{font-size:12px;font-weight:700;color:var(--bp);font-family:var(--fc);display:inline-flex;align-items:center;gap:4px}
-.wf-acc-content .wf-prod-link:hover{text-decoration:underline}
-/* Connector dot between steps */
-.wf-acc-connector{display:flex;align-items:center;padding:0 0 0 14px;height:12px;position:relative;z-index:1}
-.wf-acc-connector::after{content:'';width:12px;height:12px;border-radius:50%;background:var(--g2);border:2px solid var(--w);display:block}
-.wf-acc-step.done .wf-acc-connector::after,.wf-acc-step.open .wf-acc-connector::after{background:var(--bp)}
+
+/* Horizontal track */
+.wf-track{display:flex;align-items:flex-start;position:relative;gap:0}
+/* Connector line between steps */
+.wf-track::before{
+  content:'';position:absolute;
+  top:20px;left:20px;right:20px;height:2px;
+  background:linear-gradient(to right,var(--bp),var(--bl));
+  z-index:0;
+}
+/* Each step column */
+.wf-step-col{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  cursor:pointer;position:relative;z-index:1;
+  padding:0 6px;
+}
+.wf-step-col:hover .wf-step-name{color:var(--bp)}
+/* Circle */
+.wf-step-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--w);border:2px solid var(--g2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s;
+  font-size:13px;font-weight:700;color:var(--g5);font-family:var(--fc);
+  margin-bottom:10px;
+}
+.wf-step-col.active .wf-step-num{
+  background:var(--bp);border-color:var(--bp);color:#fff;
+  box-shadow:0 0 0 4px var(--bl);
+}
+.wf-step-col:hover:not(.active) .wf-step-num{border-color:var(--bp);color:var(--bp)}
+/* Labels */
+.wf-step-label{font-size:10px;font-weight:700;color:var(--bp);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:3px}
+.wf-step-name{font-size:13px;font-weight:700;color:var(--g9);text-align:center;transition:color .15s;line-height:1.3;font-family:var(--fc)}
+/* Active underline */
+.wf-step-col.active .wf-step-name{color:var(--bp)}
+
+/* Filter label shown below workflow */
+.wf-filter-label{margin-top:16px;font-size:12px;color:var(--g5);display:flex;align-items:center;gap:8px}
+.wf-filter-label .wf-filter-badge{background:var(--bp);color:#fff;font-size:10px;font-weight:700;border-radius:20px;padding:2px 10px}
+.wf-filter-label .wf-clear{color:var(--bp);font-size:11px;font-weight:700;cursor:pointer;margin-left:4px}
+.wf-filter-label .wf-clear:hover{text-decoration:underline}
 
 /* Product tile grid — Agilent-style with step context (from competitive analysis) */
 .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
@@ -520,26 +532,36 @@ button{font-family:var(--fn);cursor:pointer}
   <div class="pg-body">
     <!-- L3 CATEGORY SHORTCUTS -->
     <div class="sec-label">Application areas within Food &amp; Beverage</div>
-    <div class="l3-cats">
+    <div class="l3-cats" style="grid-template-columns:repeat(3,1fr)">
       <div class="l3-cat" onclick="goTo('l3')">
         <h4>Food Safety Testing</h4>
-        <p>Contaminants, vet drug residues, mycotoxins, allergens</p>
-        <div class="cat-count">14 applications →</div>
-      </div>
-      <div class="l3-cat">
-        <h4>Pesticide Residue</h4>
-        <p>Multi-residue methods, QuEChERS, regulatory compliance</p>
-        <div class="cat-count">9 applications →</div>
-      </div>
-      <div class="l3-cat">
-        <h4>Authenticity &amp; Adulteration</h4>
-        <p>Origin verification, fraud detection, label claims</p>
+        <p>PFAS, pesticides, heavy metals, foodborne contaminants, toxins, veterinary drug residues</p>
         <div class="cat-count">7 applications →</div>
       </div>
       <div class="l3-cat">
-        <h4>Nutritional Analysis</h4>
-        <p>Vitamins, minerals, fatty acids, label verification</p>
-        <div class="cat-count">8 applications →</div>
+        <h4>Food Authenticity Testing</h4>
+        <p>Geographic origin, targeted &amp; non-targeted analysis, spectroscopic approaches, adulteration</p>
+        <div class="cat-count">5 applications →</div>
+      </div>
+      <div class="l3-cat">
+        <h4>Alternative Proteins Testing</h4>
+        <p>Cell culture-based proteins, fermentation microbe-based proteins, plant-based proteins</p>
+        <div class="cat-count">3 applications →</div>
+      </div>
+      <div class="l3-cat">
+        <h4>Food Processing &amp; Packaging Testing</h4>
+        <p>Processing contaminants, food contact materials, packaging migration</p>
+        <div class="cat-count">2 applications →</div>
+      </div>
+      <div class="l3-cat">
+        <h4>Food Nutrition &amp; Health</h4>
+        <p>Amino acids, dietary supplements, food additives, functional foods, vitamins &amp; minerals</p>
+        <div class="cat-count">6 applications →</div>
+      </div>
+      <div class="l3-cat">
+        <h4>Beverage Testing</h4>
+        <p>Beer, wine, spirits, coffee &amp; tea, milk, water, juice &amp; soda</p>
+        <div class="cat-count">5 applications →</div>
       </div>
     </div>
 
@@ -589,44 +611,104 @@ button{font-family:var(--fn);cursor:pointer}
         </div>
       </div>
       <div class="facet-results">
-        <div class="fr-head"><span>Showing 4 matching applications</span><span style="font-weight:400;opacity:.7">Click any row to open the Application Detail page</span></div>
+        <div class="fr-head"><span>Showing 10 applications</span><span style="font-weight:400;opacity:.7">Click any row to open the Application Detail page</span></div>
         <div class="fr-row" onclick="goTo('ad')">
           <div class="fr-row-l">
             <h4>PFAS Testing in Food, Beverages &amp; Food Packaging</h4>
-            <p>LC-MS/MS · Fresh produce, beverages, packaging · EU 2019/1021 · EFSA guidance</p>
+            <p>LC-MS/MS · Food Safety · Fresh produce, beverages, packaging · EFSA guidance · EU 2019/1021</p>
           </div>
           <div class="fr-row-r">
-            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">PFAS</span></div>
+            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Food Safety</span></div>
             <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </div>
         <div class="fr-row">
           <div class="fr-row-l">
-            <h4>Pesticide Multi-Residue Screening (QuEChERS / LC-MS/MS)</h4>
-            <p>LC-MS/MS · Fresh produce · EU MRL · Codex Alimentarius</p>
+            <h4>Pesticides in Food</h4>
+            <p>LC-MS/MS · GC-MS/MS · Food Safety · Fruits, vegetables, cereals · EU MRL · Codex Alimentarius</p>
           </div>
           <div class="fr-row-r">
-            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">QuEChERS</span></div>
+            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Food Safety</span></div>
             <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </div>
         <div class="fr-row">
           <div class="fr-row-l">
-            <h4>Mycotoxin Screening in Cereals &amp; Nuts</h4>
-            <p>LC-MS/MS · Processed food · EU Reg. 1881/2006</p>
+            <h4>Toxins — Mycotoxin Testing</h4>
+            <p>LC-MS/MS · Food Safety · Cereals, nuts, dried fruit · EU Reg. 1881/2006</p>
           </div>
           <div class="fr-row-r">
-            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Mycotoxins</span></div>
+            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Food Safety</span></div>
             <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </div>
         <div class="fr-row">
           <div class="fr-row-l">
-            <h4>Microplastics Detection in Food &amp; Packaging</h4>
-            <p>LC-MS/MS · Processed food, beverages · Emerging regulation</p>
+            <h4>Foodborne Chemical Contaminants</h4>
+            <p>LC-MS/MS · GC-MS · Food Safety · Multi-matrix · EU Reg. 1881/2006 · FDA</p>
           </div>
           <div class="fr-row-r">
-            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Microplastics</span></div>
+            <div class="fr-chips"><span class="chip">GC-MS</span><span class="chip">Food Safety</span></div>
+            <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <div class="fr-row">
+          <div class="fr-row-l">
+            <h4>Heavy Metals in Food</h4>
+            <p>ICP-MS · Food Safety · Multi-matrix · EU Reg. 1881/2006 · FDA</p>
+          </div>
+          <div class="fr-row-r">
+            <div class="fr-chips"><span class="chip">ICP-MS</span><span class="chip">Food Safety</span></div>
+            <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <div class="fr-row">
+          <div class="fr-row-l">
+            <h4>Targeted Analysis for Food</h4>
+            <p>LC-MS/MS · GC-MS · Food Authenticity · Multi-matrix · ISO 17025</p>
+          </div>
+          <div class="fr-row-r">
+            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Authenticity</span></div>
+            <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <div class="fr-row">
+          <div class="fr-row-l">
+            <h4>Non-Targeted Analysis for Food</h4>
+            <p>LC-QTOF · GC-QTOF · Food Authenticity · Untargeted screening · Adulteration detection</p>
+          </div>
+          <div class="fr-row-r">
+            <div class="fr-chips"><span class="chip">LC-QTOF</span><span class="chip">Authenticity</span></div>
+            <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <div class="fr-row">
+          <div class="fr-row-l">
+            <h4>Plant-Based Proteins Testing</h4>
+            <p>LC-MS/MS · UV · Alternative Proteins · Nutritional content, proteins, mycotoxins</p>
+          </div>
+          <div class="fr-row-r">
+            <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">Alt. Proteins</span></div>
+            <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <div class="fr-row">
+          <div class="fr-row-l">
+            <h4>Vitamins &amp; Minerals</h4>
+            <p>LC-UV · ICP-MS · Food Nutrition &amp; Health · Supplements, fortified foods · FDA · EU</p>
+          </div>
+          <div class="fr-row-r">
+            <div class="fr-chips"><span class="chip">ICP-MS</span><span class="chip">Nutrition</span></div>
+            <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+        <div class="fr-row">
+          <div class="fr-row-l">
+            <h4>Beer Testing</h4>
+            <p>LC · GC · ICP-MS · Beverage Testing · Hops, bitterness, trace metals, contaminants</p>
+          </div>
+          <div class="fr-row-r">
+            <div class="fr-chips"><span class="chip">GC</span><span class="chip">Beverage</span></div>
             <svg class="arr-svg" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </div>
@@ -703,7 +785,7 @@ button{font-family:var(--fn);cursor:pointer}
   <div class="l3-hero">
     <span class="l3-tag">Food &amp; Beverage · Food Safety</span>
     <h1>Food Safety Testing</h1>
-    <p>Protect consumers and meet global regulatory requirements. Agilent's food safety solutions cover contaminants, veterinary drug residues, mycotoxins, and allergens — with validated methods and application specialist support.</p>
+    <p>Protect consumers and meet global regulatory requirements. Agilent's food safety solutions cover PFAS, pesticides, heavy metals, foodborne chemical contaminants, toxins, and veterinary drug residues — with validated methods and application specialist support.</p>
     <div class="hctas">
       <button class="btn-p" onclick="goTo('ad')">View PFAS in Food &amp; Packaging →</button>
       <button class="btn-wh">Download application guide</button>
@@ -735,9 +817,9 @@ button{font-family:var(--fn);cursor:pointer}
           <div class="app-img-ov"></div><span class="app-tag">Pesticides</span>
         </div>
         <div class="app-body">
-          <h3>Multi-Residue Pesticide Screening (QuEChERS)</h3>
-          <p>500+ pesticide screening in fruits, vegetables, and cereals. QuEChERS extraction with LC-MS/MS for EU MRL compliance and Codex Alimentarius.</p>
-          <div class="app-chips"><span class="chip">LC-MS/MS</span><span class="chip">QuEChERS</span><span class="chip">EU MRL</span></div>
+          <h3>Pesticides in Food</h3>
+          <p>Multi-residue screening covering 500+ pesticides in fruits, vegetables, and cereals. QuEChERS-based extraction with LC-MS/MS and GC-MS/MS for EU MRL and Codex Alimentarius compliance.</p>
+          <div class="app-chips"><span class="chip">LC-MS/MS</span><span class="chip">GC-MS/MS</span><span class="chip">EU MRL</span></div>
         </div>
         <div class="app-foot">
           <button class="btn-p" style="padding:6px 14px;font-size:11px">Full workflow →</button>
@@ -749,12 +831,63 @@ button{font-family:var(--fn);cursor:pointer}
       </div>
       <div class="app-card">
         <div class="app-img" style="background:linear-gradient(135deg,#7b3300,#e67e22)">
-          <div class="app-img-ov"></div><span class="app-tag">Mycotoxins</span>
+          <div class="app-img-ov"></div><span class="app-tag">Toxins</span>
         </div>
         <div class="app-body">
-          <h3>Mycotoxin Screening in Cereals, Nuts &amp; Dried Fruit</h3>
-          <p>AFB1, OTA, ZEN, DON, FUM quantitation to EU Reg. 1881/2006 limits. Isotope-dilution LC-MS/MS with minimal sample prep.</p>
+          <h3>Toxins — Mycotoxin Testing</h3>
+          <p>AFB1, OTA, ZEN, DON, and FUM quantitation to EU Reg. 1881/2006 limits in cereals, nuts, and dried fruit. Isotope-dilution LC-MS/MS with minimal sample prep.</p>
           <div class="app-chips"><span class="chip">LC-MS/MS</span><span class="chip">Mycotoxins</span><span class="chip">EU 1881/2006</span></div>
+        </div>
+        <div class="app-foot">
+          <button class="btn-p" style="padding:6px 14px;font-size:11px">Full workflow →</button>
+          <a class="app-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            App note
+          </a>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-img" style="background:linear-gradient(135deg,#2c3e50,#c0392b)">
+          <div class="app-img-ov"></div><span class="app-tag">Contaminants</span>
+        </div>
+        <div class="app-body">
+          <h3>Foodborne Chemical Contaminants</h3>
+          <p>Acrylamide, PAHs, furans, dioxins, and process-formed contaminants in multi-matrix food samples. GC-MS and LC-MS/MS methods aligned to EU Reg. 1881/2006 and FDA guidance.</p>
+          <div class="app-chips"><span class="chip">GC-MS</span><span class="chip">LC-MS/MS</span><span class="chip">EU 1881/2006</span></div>
+        </div>
+        <div class="app-foot">
+          <button class="btn-p" style="padding:6px 14px;font-size:11px">Full workflow →</button>
+          <a class="app-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            App note
+          </a>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-img" style="background:linear-gradient(135deg,#1a237e,#3949ab)">
+          <div class="app-img-ov"></div><span class="app-tag">Heavy Metals</span>
+        </div>
+        <div class="app-body">
+          <h3>Heavy Metals in Food</h3>
+          <p>Arsenic, cadmium, lead, and mercury quantitation by ICP-MS across multi-matrix food samples. Methods aligned to EU Reg. 1881/2006 and FDA Closer to Zero action levels.</p>
+          <div class="app-chips"><span class="chip">ICP-MS</span><span class="chip">EU 1881/2006</span><span class="chip">FDA</span></div>
+        </div>
+        <div class="app-foot">
+          <button class="btn-p" style="padding:6px 14px;font-size:11px">Full workflow →</button>
+          <a class="app-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            App note
+          </a>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-img" style="background:linear-gradient(135deg,#4a148c,#7b1fa2)">
+          <div class="app-img-ov"></div><span class="app-tag">Toxins</span>
+        </div>
+        <div class="app-body">
+          <h3>Veterinary Drug Residues</h3>
+          <p>Multi-class screening of antibiotics, hormones, and growth promoters in meat, milk, and aquaculture. LC-MS/MS methods to EU Reg. 2019/1871 and Codex MRL requirements.</p>
+          <div class="app-chips"><span class="chip">LC-MS/MS</span><span class="chip">EU 2019/1871</span><span class="chip">Codex</span></div>
         </div>
         <div class="app-foot">
           <button class="btn-p" style="padding:6px 14px;font-size:11px">Full workflow →</button>
@@ -766,32 +899,37 @@ button{font-family:var(--fn);cursor:pointer}
       </div>
     </div>
 
-    <!-- FACETED FILTER (same component, narrowed to Food Safety) -->
+    <!-- FACETED FILTER (narrowed to Food Safety) -->
     <div class="sec-label">Filter Food Safety applications</div>
     <div class="facet-section">
-      <div class="facet-head"><h3>Filter by technique, instrument, or regulation</h3><a class="clr">Clear all</a></div>
+      <div class="facet-head"><h3>Filter by technique, contaminant class, or regulation</h3><a class="clr">Clear all</a></div>
       <div class="facet-rows">
         <div class="facet-group"><h5>Technique</h5><div class="facet-opts">
           <label class="fopt"><input type="checkbox" checked/> LC-MS/MS</label>
-          <label class="fopt"><input type="checkbox"/> GC-MS/MS</label>
-          <label class="fopt"><input type="checkbox"/> ELISA / rapid test</label>
+          <label class="fopt"><input type="checkbox"/> GC-MS / GC-MS/MS</label>
+          <label class="fopt"><input type="checkbox"/> ICP-MS</label>
+          <label class="fopt"><input type="checkbox"/> LC-QTOF</label>
         </div></div>
         <div class="facet-group"><h5>Contaminant class</h5><div class="facet-opts">
           <label class="fopt"><input type="checkbox" checked/> PFAS</label>
           <label class="fopt"><input type="checkbox"/> Pesticides</label>
           <label class="fopt"><input type="checkbox"/> Mycotoxins</label>
+          <label class="fopt"><input type="checkbox"/> Heavy metals</label>
+          <label class="fopt"><input type="checkbox"/> Chemical contaminants</label>
           <label class="fopt"><input type="checkbox"/> Vet drug residues</label>
         </div></div>
         <div class="facet-group"><h5>Instrument</h5><div class="facet-opts">
-          <label class="fopt"><input type="checkbox"/> 6470B Triple Quad</label>
-          <label class="fopt"><input type="checkbox"/> 7000E GC-MS/MS</label>
-          <label class="fopt"><input type="checkbox"/> 6546 Q-TOF</label>
+          <label class="fopt"><input type="checkbox"/> 6470B Triple Quad LC/MS</label>
+          <label class="fopt"><input type="checkbox"/> 7000E Triple Quad GC/MS</label>
+          <label class="fopt"><input type="checkbox"/> 7900 ICP-MS</label>
+          <label class="fopt"><input type="checkbox"/> 6546 LC/Q-TOF</label>
         </div></div>
         <div class="facet-group"><h5>Regulation</h5><div class="facet-opts">
-          <label class="fopt"><input type="checkbox"/> EU Regulation</label>
+          <label class="fopt"><input type="checkbox"/> EU Reg. 1881/2006</label>
+          <label class="fopt"><input type="checkbox"/> EU MRL</label>
+          <label class="fopt"><input type="checkbox"/> EFSA guidance</label>
           <label class="fopt"><input type="checkbox"/> FDA / USDA</label>
           <label class="fopt"><input type="checkbox"/> Codex Alimentarius</label>
-          <label class="fopt"><input type="checkbox"/> EFSA guidance</label>
         </div></div>
       </div>
       <div class="facet-results">
@@ -799,7 +937,7 @@ button{font-family:var(--fn);cursor:pointer}
         <div class="fr-row" onclick="goTo('ad')">
           <div class="fr-row-l">
             <h4>PFAS Testing in Food, Beverages &amp; Food Packaging</h4>
-            <p>LC-MS/MS · PFAS · EFSA guidance · 6470B Triple Quad LC/MS</p>
+            <p>LC-MS/MS · PFAS · EFSA guidance · 6470B Triple Quad LC/MS · Fresh produce, beverages, packaging</p>
           </div>
           <div class="fr-row-r">
             <div class="fr-chips"><span class="chip">LC-MS/MS</span><span class="chip">PFAS</span></div>
@@ -907,104 +1045,41 @@ button{font-family:var(--fn);cursor:pointer}
       <div class="wf-comp">
         <div class="wf-comp-head">
           <h3>End-to-end workflow</h3>
-          <p>Click any step to see recommended products</p>
+          <p>Click any step to filter products below</p>
         </div>
-        <div class="wf-accordion">
 
-          <div class="wf-acc-step open" id="wf1">
-            <button class="wf-acc-trigger" onclick="toggleWf('wf1')">
-              <span class="wf-acc-num">1</span>
-              <span class="wf-acc-labels">
-                <div class="wf-acc-label">Sample prep</div>
-                <div class="wf-acc-name">Sample extraction</div>
-              </span>
-              <svg class="wf-acc-chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="wf-acc-panel">
-              <div class="wf-acc-content">
-                <div class="wf-prod-name">QuEChERS PFAS Extraction Kit &amp; ISOLUTE ENV+ SPE</div>
-                <div class="wf-prod-detail">Buffered QuEChERS extraction optimised for polar PFAS in produce and processed food. ISOLUTE ENV+ polystyrene sorbent gives &gt;80% recovery across C4–C14 chain lengths.</div>
-                <a class="wf-prod-link">View products for this step <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
-            <div class="wf-acc-connector"></div>
+        <div class="wf-track">
+          <div class="wf-step-col" id="wf1" onclick="selectStep(1)">
+            <div class="wf-step-num">1</div>
+            <div class="wf-step-label">Sample prep</div>
+            <div class="wf-step-name">Sample extraction</div>
           </div>
-
-          <div class="wf-acc-step" id="wf2">
-            <button class="wf-acc-trigger" onclick="toggleWf('wf2')">
-              <span class="wf-acc-num">2</span>
-              <span class="wf-acc-labels">
-                <div class="wf-acc-label">Cleanup</div>
-                <div class="wf-acc-name">SPE cleanup</div>
-              </span>
-              <svg class="wf-acc-chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="wf-acc-panel">
-              <div class="wf-acc-content">
-                <div class="wf-prod-name">Bond Elut PFAS Cartridges (WAX sorbent)</div>
-                <div class="wf-prod-detail">Mixed-mode WAX sorbent removes matrix interferences from food extracts while retaining all regulated PFAS. Low blank background critical for ultra-trace work.</div>
-                <a class="wf-prod-link">View products for this step <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
-            <div class="wf-acc-connector"></div>
+          <div class="wf-step-col" id="wf2" onclick="selectStep(2)">
+            <div class="wf-step-num">2</div>
+            <div class="wf-step-label">Cleanup</div>
+            <div class="wf-step-name">SPE cleanup</div>
           </div>
-
-          <div class="wf-acc-step" id="wf3">
-            <button class="wf-acc-trigger" onclick="toggleWf('wf3')">
-              <span class="wf-acc-num">3</span>
-              <span class="wf-acc-labels">
-                <div class="wf-acc-label">Separation</div>
-                <div class="wf-acc-name">LC separation</div>
-              </span>
-              <svg class="wf-acc-chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="wf-acc-panel">
-              <div class="wf-acc-content">
-                <div class="wf-prod-name">1290 Infinity II HPLC + ZORBAX Eclipse Plus C18</div>
-                <div class="wf-prod-detail">1200 bar system with delay column configuration eliminates PFAS background bleed from PEEK tubing. ZORBAX Eclipse C18 (2.1×100 mm, 1.8 µm) retains ultra-short-chain species cleanly.</div>
-                <a class="wf-prod-link">View products for this step <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
-            <div class="wf-acc-connector"></div>
+          <div class="wf-step-col" id="wf3" onclick="selectStep(3)">
+            <div class="wf-step-num">3</div>
+            <div class="wf-step-label">Separation</div>
+            <div class="wf-step-name">LC separation</div>
           </div>
-
-          <div class="wf-acc-step" id="wf4">
-            <button class="wf-acc-trigger" onclick="toggleWf('wf4')">
-              <span class="wf-acc-num">4</span>
-              <span class="wf-acc-labels">
-                <div class="wf-acc-label">Detection</div>
-                <div class="wf-acc-name">MS/MS detection</div>
-              </span>
-              <svg class="wf-acc-chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="wf-acc-panel">
-              <div class="wf-acc-content">
-                <div class="wf-prod-name">Agilent 6470B Triple Quadrupole LC/MS</div>
-                <div class="wf-prod-detail">500 MRM transitions with dynamic scheduling. Jet Stream ESI handles high-matrix food extracts without signal suppression. Achieves 0.01 µg/kg LOQ in fresh produce.</div>
-                <a class="wf-prod-link">View products for this step <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
-            <div class="wf-acc-connector"></div>
+          <div class="wf-step-col" id="wf4" onclick="selectStep(4)">
+            <div class="wf-step-num">4</div>
+            <div class="wf-step-label">Detection</div>
+            <div class="wf-step-name">MS/MS detection</div>
           </div>
-
-          <div class="wf-acc-step" id="wf5">
-            <button class="wf-acc-trigger" onclick="toggleWf('wf5')">
-              <span class="wf-acc-num">5</span>
-              <span class="wf-acc-labels">
-                <div class="wf-acc-label">Data review</div>
-                <div class="wf-acc-name">Data analysis</div>
-              </span>
-              <svg class="wf-acc-chev" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="wf-acc-panel">
-              <div class="wf-acc-content">
-                <div class="wf-prod-name">MassHunter Quant Navigator + PFAS Reporting Template</div>
-                <div class="wf-prod-detail">Automated batch processing with regulatory limit flagging. Pre-built PFAS template maps all 40 compounds to EFSA dietary exposure thresholds. 21 CFR Part 11 compliant audit trail.</div>
-                <a class="wf-prod-link">View products for this step <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-              </div>
-            </div>
+          <div class="wf-step-col" id="wf5" onclick="selectStep(5)">
+            <div class="wf-step-num">5</div>
+            <div class="wf-step-label">Data review</div>
+            <div class="wf-step-name">Data analysis</div>
           </div>
+        </div>
 
+        <div class="wf-filter-label" id="wf-filter-label" style="display:none">
+          <span>Showing products for</span>
+          <span class="wf-filter-badge" id="wf-filter-badge"></span>
+          <span class="wf-clear" onclick="selectStep(0)">Show all products ✕</span>
         </div>
       </div>
 
@@ -1019,8 +1094,7 @@ button{font-family:var(--fn);cursor:pointer}
       <div class="sec-h">Products for this workflow</div>
       <div class="prod-grid">
 
-        <!-- TILE 1: Detection — key instrument -->
-        <div class="prod-tile">
+        <div class="prod-tile" data-step="4">
           <div class="prod-tile-step">
             <svg viewBox="0 0 24 24"><path d="M9 18 15 12 9 6"/></svg>
             Step 4 · MS/MS Detection
@@ -1054,8 +1128,7 @@ button{font-family:var(--fn);cursor:pointer}
           </div>
         </div>
 
-        <!-- TILE 2: LC System -->
-        <div class="prod-tile">
+        <div class="prod-tile" data-step="3">
           <div class="prod-tile-step">
             <svg viewBox="0 0 24 24"><path d="M9 18 15 12 9 6"/></svg>
             Step 3 · LC Separation
@@ -1088,8 +1161,7 @@ button{font-family:var(--fn);cursor:pointer}
           </div>
         </div>
 
-        <!-- TILE 3: Column (consumable — Add to cart) -->
-        <div class="prod-tile">
+        <div class="prod-tile" data-step="3">
           <div class="prod-tile-step">
             <svg viewBox="0 0 24 24"><path d="M9 18 15 12 9 6"/></svg>
             Step 3 · Column
@@ -1121,8 +1193,7 @@ button{font-family:var(--fn);cursor:pointer}
           </div>
         </div>
 
-        <!-- TILE 4: SPE consumable -->
-        <div class="prod-tile">
+        <div class="prod-tile" data-step="2">
           <div class="prod-tile-step">
             <svg viewBox="0 0 24 24"><path d="M9 18 15 12 9 6"/></svg>
             Step 2 · SPE Cleanup
@@ -1154,8 +1225,7 @@ button{font-family:var(--fn);cursor:pointer}
           </div>
         </div>
 
-        <!-- TILE 5: Software -->
-        <div class="prod-tile">
+        <div class="prod-tile" data-step="5">
           <div class="prod-tile-step">
             <svg viewBox="0 0 24 24"><path d="M9 18 15 12 9 6"/></svg>
             Step 5 · Data Analysis
@@ -1178,8 +1248,7 @@ button{font-family:var(--fn);cursor:pointer}
           </div>
         </div>
 
-        <!-- TILE 6: Sample prep consumable -->
-        <div class="prod-tile">
+        <div class="prod-tile" data-step="1">
           <div class="prod-tile-step">
             <svg viewBox="0 0 24 24"><path d="M9 18 15 12 9 6"/></svg>
             Step 1 · Sample Extraction
@@ -1240,10 +1309,10 @@ button{font-family:var(--fn);cursor:pointer}
       <div class="also-in">
         <h5>This application also appears in</h5>
         <span class="also-tag" onclick="goTo('l1')">Environmental</span>
-        <span class="also-tag">Pharma &amp; Biotech</span>
-        <span class="also-tag">Packaging &amp; Materials</span>
-        <span class="also-tag">Water Testing</span>
-        <span class="also-tag">Food Authenticity</span>
+        <span class="also-tag">Food Processing &amp; Packaging</span>
+        <span class="also-tag">Beverage Testing</span>
+        <span class="also-tag">Alternative Proteins</span>
+        <span class="also-tag">Food Nutrition &amp; Health</span>
       </div>
     </div>
 
@@ -1441,23 +1510,54 @@ function renderQuote() {
   });
 }
 
-function toggleWf(id) {
-  var step = document.getElementById(id);
-  var isOpen = step.classList.contains('open');
-  // Close all steps
-  document.querySelectorAll('.wf-acc-step').forEach(function(s) {
-    s.classList.remove('open');
+// ── Workflow step selector — filters product tiles ─────────────────────────
+// step=0 means "show all". Clicking active step again deselects (show all).
+var activeStep = 0;
+
+var stepNames = {
+  1: 'Sample extraction',
+  2: 'SPE cleanup',
+  3: 'LC separation',
+  4: 'MS/MS detection',
+  5: 'Data analysis'
+};
+
+function selectStep(step) {
+  // Toggle off if clicking active step
+  if (activeStep === step) {
+    step = 0;
+  }
+  activeStep = step;
+
+  // Update step circle visuals
+  for (var i = 1; i <= 5; i++) {
+    var col = document.getElementById('wf' + i);
+    if (col) {
+      col.classList.toggle('active', i === step);
+    }
+  }
+
+  // Filter product tiles
+  var tiles = document.querySelectorAll('.prod-tile');
+  tiles.forEach(function(tile) {
+    var tileStep = parseInt(tile.getAttribute('data-step'));
+    if (step === 0 || tileStep === step) {
+      tile.style.display = 'flex';
+    } else {
+      tile.style.display = 'none';
+    }
   });
-  // Mark preceding steps as done
-  var allSteps = Array.from(document.querySelectorAll('.wf-acc-step'));
-  var idx = allSteps.indexOf(step);
-  allSteps.forEach(function(s, i) {
-    if (i < idx) s.classList.add('done');
-    else s.classList.remove('done');
-  });
-  // Toggle the clicked one open (unless it was already open)
-  if (!isOpen) {
-    step.classList.add('open');
+
+  // Show/hide filter label
+  var label = document.getElementById('wf-filter-label');
+  var badge = document.getElementById('wf-filter-badge');
+  if (label && badge) {
+    if (step === 0) {
+      label.style.display = 'none';
+    } else {
+      label.style.display = 'flex';
+      badge.textContent = 'Step ' + step + ' — ' + stepNames[step];
+    }
   }
 }
 
